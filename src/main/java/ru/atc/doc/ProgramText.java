@@ -13,9 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class ProgramText {
 
 	public void generate(String sourceFolderPath) {
@@ -23,9 +20,9 @@ public class ProgramText {
 			PrintWriter printWriter = new PrintWriter(getOutputFileName());
 			writeOutputFile(sourceFolderPath, printWriter);
 			printWriter.flush();
-			log.info("SUCCESS");
+			System.out.println("SUCCESS");
 		} catch (IOException e) {
-			log.error("ERROR");
+			System.out.println("ERROR");
 			e.printStackTrace();
 		}
 	}
@@ -48,10 +45,10 @@ public class ProgramText {
 			}
 
 			for (String fileName : fileNames) {
-				log.info("Reading directory: " + fileName);
 				File f = new File(rootFolder, fileName);
 
 				if (f.isDirectory()) {
+					System.out.println("Reading directory: " + f.getName());
 					writeOutputFile(f.getAbsolutePath(), printWriter);
 				}
 			}
@@ -60,7 +57,7 @@ public class ProgramText {
 
 	private void writeJavaFiles(PrintWriter printWriter, File rootFolder, String[] javaFiles) throws IOException {
 		for (String fileName : javaFiles) {
-			log.info("Reading file: " + fileName);
+			System.out.println("Reading file: " + fileName);
 			File f = new File(rootFolder, fileName);
 			BufferedReader br = new BufferedReader(new FileReader(f));
 			printWriter.println("Файл " + fileName);
