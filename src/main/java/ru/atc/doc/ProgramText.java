@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,7 +48,7 @@ public class ProgramText {
 			}
 
 			for (String fileName : fileNames) {
-				log.info("Reading directory " + fileName);
+				log.info("Reading directory: " + fileName);
 				File f = new File(rootFolder, fileName);
 
 				if (f.isDirectory()) {
@@ -82,11 +83,12 @@ public class ProgramText {
 
 	private void writePackageName(PrintWriter pw, File rootFolder, String javaFile) {
 		String pathString = new File(rootFolder, javaFile).getPath();
-		String[] splitPath = pathString.split("/");
-		int startIndex = Arrays.asList(splitPath).indexOf("ru");
+		String fileSeparator = Pattern.quote(System.getProperty("file.separator"));
+		String[] splitPath = pathString.split(fileSeparator);
+		int startPackageWordIndex = Arrays.asList(splitPath).indexOf("ru");
 		List<String> list = new ArrayList<>();
 
-		for (int i = startIndex; i < splitPath.length - 1; i++) {
+		for (int i = startPackageWordIndex; i < splitPath.length - 1; i++) {
 			list.add(splitPath[i]);
 		}
 
