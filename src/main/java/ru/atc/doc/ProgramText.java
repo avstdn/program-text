@@ -6,27 +6,22 @@ import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 public class ProgramText {
 
-	public void generate(String sourceFolderPath, String extensions, String ignoreFolders) {
+	private static final String OUTPUT_FILE_EXTENSION = ".txt";
+
+	public void generate(String sourceFolderPath, String extensions, String ignoreFolders, String outputFileName) {
 		try {
-			PrintWriter printWriter = new PrintWriter(getOutputFileName());
+			PrintWriter printWriter = new PrintWriter(outputFileName + OUTPUT_FILE_EXTENSION);
 			writeOutputFile(sourceFolderPath, printWriter, extensions, ignoreFolders);
 			printWriter.flush();
-			System.out.println("SUCCESS");
+			System.out.println("SUCCESS: " + outputFileName);
 		} catch (IOException e) {
-			System.out.println("ERROR");
+			System.out.println("ERROR: " + outputFileName);
 			e.printStackTrace();
 		}
-	}
-
-	private String getOutputFileName() {
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-		return String.format("output-%s.txt", LocalDateTime.now().format(dateTimeFormatter));
 	}
 
 	private void writeOutputFile(String sourceFolderPath, PrintWriter printWriter, String extensions, String ignoreFolders) throws IOException {
@@ -38,6 +33,7 @@ public class ProgramText {
 			String[] files = getFiles(rootFolder, extensions);
 
 			if (files != null && files.length > 0) {
+				// Возможно понадобится дописывать название пакета
 //				writePackageName(printWriter, rootFolder, files[0], startPackage);
 				writeFiles(printWriter, rootFolder, files);
 			}
@@ -46,11 +42,12 @@ public class ProgramText {
 				File f = new File(rootFolder, fileName);
 
 				if (f.isDirectory()) {
+					// Логи не стал убирать. Можно раскомментировать, если появятся ошибки
 					if (Arrays.stream(ignoreFoldersArray).noneMatch(f.getAbsolutePath()::equalsIgnoreCase)) {
-						System.out.println("+ Reading directory: " + f.getName());
+//						System.out.println("+ Reading directory: " + f.getName());
 						writeOutputFile(f.getAbsolutePath(), printWriter, extensions, ignoreFolders);
 					} else {
-						System.out.println("- Ignore directory: " + f.getName());
+//						System.out.println("- Ignore directory: " + f.getName());
 					}
 				}
 			}
@@ -59,7 +56,8 @@ public class ProgramText {
 
 	private void writeFiles(PrintWriter printWriter, File rootFolder, String[] javaFiles) throws IOException {
 		for (String fileName : javaFiles) {
-			System.out.println("Reading file: " + fileName);
+			// Логи не стал убирать. Можно раскомментировать, если появятся ошибки
+//			System.out.println("Reading file: " + fileName);
 			File f = new File(rootFolder, fileName);
 			BufferedReader br = new BufferedReader(new FileReader(f));
 			printWriter.println("Файл " + fileName);
