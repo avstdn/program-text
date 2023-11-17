@@ -7,9 +7,10 @@ echo '= EXECUTION BEGIN ='
 echo '==================='
 
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-address/src .java 0 soop-address
+java -jar program-text.jar ${PATH_TO_PROJECT}/soop-actuator/src .java 0 soop-actuator
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-client/soop-ws .js,.scss ${PATH_TO_PROJECT}/soop-client/soop-ws/build,${PATH_TO_PROJECT}/soop-client/soop-ws/ext,${PATH_TO_PROJECT}/soop-client/soop-ws/packages,${PATH_TO_PROJECT}/soop-client/soop-ws/resources soop-client
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-common-type/src .java 0 soop-common-type
-java -jar program-text.jar ${PATH_TO_PROJECT}/soop-db/sql .sql ${PATH_TO_PROJECT}/soop-db/sql/archive,${PATH_TO_PROJECT}/soop-db/sql/dev,${PATH_TO_PROJECT}/soop-db/sql/todo soop-db
+java -jar program-text.jar ${PATH_TO_PROJECT}/soop-db/sql/ddl .sql 0 soop-db
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-eir-rmu/src .java 0 soop-eir-rmu
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-fanid/src .java 0 soop-fanid
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-fms/src .java 0 soop-fms
@@ -35,9 +36,9 @@ java -jar program-text.jar ${PATH_TO_PROJECT}/soop-snils/src .java 0 soop-snils
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-snopos/src .java 0 soop-snopos
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-sokd/src .java 0 soop-sokd
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-soshp/src .java 0 soop-soshp
-java -jar program-text.jar ${PATH_TO_PROJECT}/soop-template .jrxml 0 soop-template
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-ws-consumer/src .java 0 soop-ws-consumer
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-ws-provider/src .java 0 soop-ws-provider
+java -jar program-text.jar ${PATH_TO_PROJECT}/soop-xjc-plugins/src .java 0 soop-xjc-plugins
 java -jar program-text.jar ${PATH_TO_PROJECT}/soop-zags/src .java 0 soop-zags
 java -jar program-text.jar ${PATH_TO_PROJECT}/sudis-sp/src .java 0 sudis-sp
 java -jar program-text.jar ${PATH_TO_PROJECT}/sudis-token/src .java 0 sudis-token
